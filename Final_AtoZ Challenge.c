@@ -7,6 +7,8 @@
 #include <ctype.h>
 #include <time.h>
 #include <unistd.h>
+#include <dos.h>
+
 
 void ClearConsoleToColors(int ForgC, int BackC);
 void gotoxy(int x, int y);
@@ -17,6 +19,7 @@ void character(char num);
 void right();
 void left();
 void Read_file(char*dir, char*type, int x, int y);
+
 
 //Read_file("right.txt","r",49,9);
 //Read_file("left.txt","r",23,9);
@@ -73,15 +76,16 @@ void play_gate_time()
 {
     system("cls");
     int i,j,k,check=50,sec=10,index_cha=0,index_t=7;
+    int r1=42,r2=30;
     j=sec;
     char *cha[27] = {'a','b','c','d','e','f','g','h','i','j','k','l'\
     ,'m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
     int key = 0;
-    gotoxy(19,25);  printf("Please put your keyboard : A to Z");
+    gotoxy(20,24);  printf("Please put your keyboard : A to Z");
     gotoxy(20,25);  printf("Please put your keyboard : <spacebar>");
-    gotoxy(5,3);    printf("Time : ");
-    gotoxy(12,3);   printf("%.2d",sec);
-    gotoxy(16,3);
+    //gotoxy(5,3);    printf("Time : ");
+    //gotoxy(12,3);   printf("%.2d",sec);
+    gotoxy(20,3);
 
     //500000000
 
@@ -94,10 +98,12 @@ void play_gate_time()
     }*/
 
 
-    for(j=0;j<=check;j++){
+
+
+   /* for(j=0;j<=check;j++){
         printf("%c",177);
     }
-
+*/
     while(1)
     {
         if (_kbhit())
@@ -105,21 +111,20 @@ void play_gate_time()
             key =_getch();
 
             if (key == ' '){
+                system("cls");
                 break;}
         }
     }
-    //system("cls");
 
     character(cha[index_cha]);
-    int r1=42,r2=30;
-    while(1){
-
+     while(1){
         if (_kbhit())
         {
             key =_getch();
-            system("cls");
+
             if (key == cha[index_cha]){
                 character(cha[index_cha]);
+                Beep(400, 10);
 
                 for(i=1;i<=15;i++){
                     system("cls");
@@ -128,15 +133,73 @@ void play_gate_time()
                     wait(0.9);
                 }
 
+                index_cha++;
+                system("cls");
+                character(cha[index_cha]);
+                }
+            else
+                character(cha[index_cha]);
+
+        }
+     }
+
+//--------------------------------------------------------- mix ----------------------------------------
+ /*   character(cha[index_cha]);
+
+    while(1){
+        system("cls");
+        character(cha[index_cha]);
+        if (_kbhit())
+        {
+            gotoxy(9,3);    printf("Time : ");
+            gotoxy(16,3);   printf("%.2d",sec);
+            key =_getch();
+            system("cls");
+            if (key == cha[index_cha]){
+                character(cha[index_cha]);
+
+                for(i=1;i<=12;i++){
+                    system("cls");
+                    gotoxy(20,3);
+                    for(j=0;j<=check;j++){
+                        printf("%c",177);
+                    }
+                    gotoxy(9,3);    printf("Time : ");
+                    gotoxy(16,3);   printf("%.2d",sec);
+                    Read_file("right.txt","r",r1+i,9);
+                    Read_file("left.txt","r",r2-i,9);
+                    wait(0.9);
+                }
+
 
                 index_cha++;
                 system("cls");
-                character(cha[index_cha]);}
-            else
                 character(cha[index_cha]);
+                }
+
+        }
+        else{
+            system("cls");
+            character(cha[index_cha]);
+            if(sec <= 0){
+                system("cls");
+                Read_file("time_out.txt","r",2,9);
+                break;}
+
+            gotoxy(9,3);    printf("Time : ");
+            gotoxy(16,3);   printf("%.2d",sec);
+            gotoxy(20,3);
+            for(j=0;j<=check;j++){
+                printf("%c",177);
+            }
+            sec--;  check-=5;
+            wait(1);
+
+
         }
     }
-
+*/
+//--------------------------------------------- Time--------------------------------
 /*
     while(1){
         system("cls");
@@ -203,8 +266,10 @@ void wait( int sec )
 {
      clock_t end_wait;
      end_wait = clock() + sec * CLK_TCK;
-     while (clock() < end_wait){}
+     while (clock() < end_wait){usleep(1000);}
 }
+
+
 
 void load(){
     int r,q;
