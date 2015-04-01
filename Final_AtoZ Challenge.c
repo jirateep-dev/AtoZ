@@ -9,16 +9,20 @@
 #include <unistd.h>
 #include <math.h>
 
+int i,num_c=97,num_i=48;
+char cha[27],cha_n[11],c;
+/*
 char c;
 char *cha[27] = {'a','b','c','d','e','f','g','h','i','j','k','l'\
 ,'m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
-char *cha_n[27] = {'0','1','2','3','4','5','6','7','8','9'};
+char *cha_n[11] = {'0','1','2','3','4','5','6','7','8','9'};*/
+
 
 void ClearConsoleToColors(int ForgC, int BackC);
 void textcolor(int color);
 const char*random_cha(char*dir);
 void Read_file(char*dir, int x, int y);
-void Read_file2(char* dir,char**pointer,char character, int x, int y);
+void Read_file2(char* dir,const char *pointer,char character, int x, int y);
 void time_spented(double time_spent);
 void show_word(char*dir,const char*word,int index_x,int index_y,int px,int py);  // px = position x / py = position y
 void character(char num);
@@ -33,8 +37,16 @@ void play_stage2to4(int stage);
 
 int main()
 {
-  // play_stage1();
-  // play_stage2to4();
+    for(i=0;i<=25;i++){
+        cha[i] = num_c;
+        num_c++;
+    }
+    for(i=0;i<=9;i++){
+        cha_n[i] = num_i;
+        num_i++;
+    }
+    //play_stage1();
+    //play_stage2to4(3);
 
     getch();
 
@@ -72,7 +84,7 @@ void play_stage1()
     begin = clock();
 
     //character(cha[index_cha]);
-    Read_file2("chars.txt",&cha,cha[index_cha],34,7);
+    Read_file2("chars.txt",cha,cha[index_cha],34,7);
 
      while(1){
         gotoxy(17,20);  printf("If you want to restart press your keyboard : <spacebar>");
@@ -85,14 +97,14 @@ void play_stage1()
                 break;}
 
             if (key == cha[index_cha]){
-                Read_file2("chars.txt",&cha,cha[index_cha],34,7);
+                Read_file2("chars.txt",cha,cha[index_cha],34,7);
 
                 Beep(400, 50);
 
                 for(i=1;i<=6;i++){
                     system("cls");
-                    Read_file2("LR_UD.txt",&cha_n,'2',r1+i,9);
-                    Read_file2("LR_UD.txt",&cha_n,'1',r2-i,9);
+                    Read_file2("LR_UD.txt",cha_n,'2',r1+i,9);
+                    Read_file2("LR_UD.txt",cha_n,'1',r2-i,9);
                     gotoxy(17,20);  printf("If you want to restart press your keyboard : <spacebar>");
                 }
                 if(key == 'z')
@@ -100,11 +112,11 @@ void play_stage1()
 
                 index_cha++;
                 system("cls");
-                Read_file2("chars.txt",&cha,cha[index_cha],34,7);
+                Read_file2("chars.txt",cha,cha[index_cha],34,7);
 
                 }
             else
-                Read_file2("chars.txt",&cha,cha[index_cha],34,7);
+                Read_file2("chars.txt",cha,cha[index_cha],34,7);
                 gotoxy(17,20);  printf("If you want to restart press your keyboard : <spacebar>");
 
         }
@@ -134,8 +146,8 @@ void stage2()
         int r1=15,r2=15;
         system("cls");
         strcpy(word,random_cha("2words.txt"));
-        Read_file2("chars.txt",&cha,word[0], 28, 1);
-        Read_file2("chars.txt",&cha,word[1], 42, 1);
+        Read_file2("chars.txt",cha,word[0], 28, 1);
+        Read_file2("chars.txt",cha,word[1], 42, 1);
         gotoxy(14,0);  printf("If you want to restart press your keyboard : <spacebar>");
 
         while(1)
@@ -150,46 +162,46 @@ void stage2()
 
                 if (key == word[0] && check==0){
                     Beep(400, 50);
-                    Read_file2("ans_character.txt",&cha,word[0], 28, 13);
+                    Read_file2("ans_character.txt",cha,word[0], 28, 13);
                     for(j=1;j<=6;j++){
                         system("cls");
                         gotoxy(14,0);  printf("If you want to restart press your keyboard : <spacebar>");
-                        Read_file2("chars.txt",&cha,word[0], 28, 1);
-                        Read_file2("chars.txt",&cha,word[1], 42, 1);
-                        Read_file2("LR_UD.txt",&cha_n,'3',28,r1-j);
-                        Read_file2("LR_UD.txt",&cha_n,'4',28,r2+j);
+                        Read_file2("chars.txt",cha,word[0], 28, 1);
+                        Read_file2("chars.txt",cha,word[1], 42, 1);
+                        Read_file2("LR_UD.txt",cha_n,'3',28,r1-j);
+                        Read_file2("LR_UD.txt",cha_n,'4',28,r2+j);
 
 
                     }
                     system("cls");
                     gotoxy(14,0);  printf("If you want to restart press your keyboard : <spacebar>");
                     textcolor(12);
-                    Read_file2("chars.txt",&cha,word[0], 28, 1);
+                    Read_file2("chars.txt",cha,word[0], 28, 1);
                     textcolor(14);
-                    Read_file2("chars.txt",&cha,word[1], 42, 1);
-                    Read_file2("ans_character.txt",&cha,word[0], 28, 13);
+                    Read_file2("chars.txt",cha,word[1], 42, 1);
+                    Read_file2("ans_character.txt",cha,word[0], 28, 13);
                     check++;}
                 else if (key == word[1] && check==1){
                     Beep(400, 50);
-                    Read_file2("ans_character.txt",&cha,word[1], 42, 13);
+                    Read_file2("ans_character.txt",cha,word[1], 42, 13);
                     for(j=1;j<=6;j++){
                         system("cls");
                         gotoxy(14,0);  printf("If you want to restart press your keyboard : <spacebar>");
-                        Read_file2("chars.txt",&cha,word[0], 28, 1);
-                        Read_file2("chars.txt",&cha,word[1], 42, 1);
-                        Read_file2("ans_character.txt",&cha,word[0], 28, 13);
-                        Read_file2("LR_UD.txt",&cha_n,'3',42,r1-j);
-                        Read_file2("LR_UD.txt",&cha_n,'4',42,r2+j);
+                        Read_file2("chars.txt",cha,word[0], 28, 1);
+                        Read_file2("chars.txt",cha,word[1], 42, 1);
+                        Read_file2("ans_character.txt",cha,word[0], 28, 13);
+                        Read_file2("LR_UD.txt",cha_n,'3',42,r1-j);
+                        Read_file2("LR_UD.txt",cha_n,'4',42,r2+j);
 
                     }
                     system("cls");
                     gotoxy(14,0);  printf("If you want to restart press your keyboard : <spacebar>");
                     textcolor(12);
-                    Read_file2("chars.txt",&cha,word[0], 28, 1);
-                    Read_file2("chars.txt",&cha,word[1], 42, 1);
+                    Read_file2("chars.txt",cha,word[0], 28, 1);
+                    Read_file2("chars.txt",cha,word[1], 42, 1);
                     textcolor(14);
-                    Read_file2("ans_character.txt",&cha,word[0], 28, 13);
-                    Read_file2("ans_character.txt",&cha,word[1], 42, 13);
+                    Read_file2("ans_character.txt",cha,word[0], 28, 13);
+                    Read_file2("ans_character.txt",cha,word[1], 42, 13);
                     wait(1);
                     break;
                 }
@@ -226,34 +238,34 @@ void stage3()
 
                 if (key == word[0] && check==0){
                     Beep(400, 50);
-                    Read_file2("ans_character.txt",&cha,word[0], 19, 13);
+                    Read_file2("ans_character.txt",cha,word[0], 19, 13);
                     for(j=1;j<=4;j++){
                         system("cls");
                         gotoxy(14,0);  printf("If you want to restart press your keyboard : <spacebar>");
                         show_word("chars.txt",word,0,2,19,1);
-                        Read_file2("LR_UD.txt",&cha_n,'3',19,r1-j);
-                        Read_file2("LR_UD.txt",&cha_n,'4',19,r2+j);
+                        Read_file2("LR_UD.txt",cha_n,'3',19,r1-j);
+                        Read_file2("LR_UD.txt",cha_n,'4',19,r2+j);
 
                     }
                     system("cls");
                     gotoxy(14,0);  printf("If you want to restart press your keyboard : <spacebar>");
                     textcolor(10);
-                    Read_file2("chars.txt",&cha,word[0], 19, 1);
+                    Read_file2("chars.txt",cha,word[0], 19, 1);
                     textcolor(12);
                     show_word("chars.txt",word,1,2,33,1);
-                    Read_file2("ans_character.txt",&cha,word[0], 19, 13);
+                    Read_file2("ans_character.txt",cha,word[0], 19, 13);
                     check++;}
 
                 else if (key == word[1] && check==1){
                     Beep(400, 50);
-                    Read_file2("ans_character.txt",&cha,word[1], 33, 13);
+                    Read_file2("ans_character.txt",cha,word[1], 33, 13);
                     for(j=1;j<=4;j++){
                         system("cls");
                         gotoxy(14,0);  printf("If you want to restart press your keyboard : <spacebar>");
                         show_word("chars.txt",word,0,2,19,1);
-                        Read_file2("ans_character.txt",&cha,word[0], 19, 13);
-                        Read_file2("LR_UD.txt",&cha_n,'3',33,r1-j);
-                        Read_file2("LR_UD.txt",&cha_n,'4',33,r2+j);
+                        Read_file2("ans_character.txt",cha,word[0], 19, 13);
+                        Read_file2("LR_UD.txt",cha_n,'3',33,r1-j);
+                        Read_file2("LR_UD.txt",cha_n,'4',33,r2+j);
 
                     }
                     system("cls");
@@ -261,21 +273,21 @@ void stage3()
                     textcolor(10);
                     show_word("chars.txt",word,0,1,19,1);
                     textcolor(12);
-                    Read_file2("chars.txt",&cha,word[2], 47, 1);
+                    Read_file2("chars.txt",cha,word[2], 47, 1);
                     show_word("ans_character.txt",word,0,1,19,13);
                     check++;
                 }
                 else if (key == word[2] && check==2){
                     Beep(400, 50);
-                    Read_file2("ans_character.txt",&cha,word[2], 47, 13);
+                    Read_file2("ans_character.txt",cha,word[2], 47, 13);
                     for(j=1;j<=4;j++){
                         system("cls");
                         gotoxy(14,0);  printf("If you want to restart press your keyboard : <spacebar>");
                         show_word("chars.txt",word,0,2,19,1);
-                        Read_file2("ans_character.txt",&cha,word[0], 28, 13);
-                        Read_file2("ans_character.txt",&cha,word[1], 33, 13);
-                        Read_file2("LR_UD.txt",&cha_n,'3',47,r1-j);
-                        Read_file2("LR_UD.txt",&cha_n,'4',47,r2+j);
+                        Read_file2("ans_character.txt",cha,word[0], 28, 13);
+                        Read_file2("ans_character.txt",cha,word[1], 33, 13);
+                        Read_file2("LR_UD.txt",cha_n,'3',47,r1-j);
+                        Read_file2("LR_UD.txt",cha_n,'4',47,r2+j);
                     }
                     system("cls");
                     gotoxy(14,0);  printf("If you want to restart press your keyboard : <spacebar>");
@@ -319,34 +331,34 @@ void stage4()
 
                 if (key == word[0] && check==0){
                     Beep(400, 50);
-                    Read_file2("ans_character.txt",&cha,word[0], 14, 13);
+                    Read_file2("ans_character.txt",cha,word[0], 14, 13);
                     for(j=1;j<=4;j++){
                         system("cls");
                         gotoxy(14,0);  printf("If you want to restart press your keyboard : <spacebar>");
                         show_word("chars.txt",word,0,3,14,1);
-                        Read_file2("LR_UD.txt",&cha_n,'3',14,r1-j);
-                        Read_file2("LR_UD.txt",&cha_n,'4',14,r2+j);
+                        Read_file2("LR_UD.txt",cha_n,'3',14,r1-j);
+                        Read_file2("LR_UD.txt",cha_n,'4',14,r2+j);
 
                     }
                     system("cls");
                     gotoxy(14,0);  printf("If you want to restart press your keyboard : <spacebar>");
                     textcolor(11);
-                    Read_file2("chars.txt",&cha,word[0], 14, 1);
+                    Read_file2("chars.txt",cha,word[0], 14, 1);
                     textcolor(13);
                     show_word("chars.txt",word,1,3,28,1);
-                    Read_file2("ans_character.txt",&cha,word[0], 14, 13);
+                    Read_file2("ans_character.txt",cha,word[0], 14, 13);
                     check++;}
 
                 else if (key == word[1] && check==1){
                     Beep(400, 50);
-                    Read_file2("ans_character.txt",&cha,word[1], 28, 13);
+                    Read_file2("ans_character.txt",cha,word[1], 28, 13);
                     for(j=1;j<=4;j++){
                         system("cls");
                         gotoxy(14,0);  printf("If you want to restart press your keyboard : <spacebar>");
                         show_word("chars.txt",word,0,3,14,1);
-                        Read_file2("ans_character.txt",&cha,word[0], 14, 13);
-                        Read_file2("LR_UD.txt",&cha_n,'3',28,r1-j);
-                        Read_file2("LR_UD.txt",&cha_n,'4',28,r2+j);
+                        Read_file2("ans_character.txt",cha,word[0], 14, 13);
+                        Read_file2("LR_UD.txt",cha_n,'3',28,r1-j);
+                        Read_file2("LR_UD.txt",cha_n,'4',28,r2+j);
 
                     }
                     system("cls");
@@ -360,35 +372,35 @@ void stage4()
                 }
                 else if (key == word[2] && check==2){
                     Beep(400, 50);
-                    Read_file2("ans_character.txt",&cha,word[2], 42, 13);
+                    Read_file2("ans_character.txt",cha,word[2], 42, 13);
                     for(j=1;j<=4;j++){
                         system("cls");
                         gotoxy(14,0);  printf("If you want to restart press your keyboard : <spacebar>");
                         show_word("chars.txt",word,0,3,14,1);
-                        Read_file2("ans_character.txt",&cha,word[0], 14, 13);
-                        Read_file2("ans_character.txt",&cha,word[1], 28, 13);
-                        Read_file2("LR_UD.txt",&cha_n,'3',42,r1-j);
-                        Read_file2("LR_UD.txt",&cha_n,'4',42,r2+j);
+                        Read_file2("ans_character.txt",cha,word[0], 14, 13);
+                        Read_file2("ans_character.txt",cha,word[1], 28, 13);
+                        Read_file2("LR_UD.txt",cha_n,'3',42,r1-j);
+                        Read_file2("LR_UD.txt",cha_n,'4',42,r2+j);
                     }
                     system("cls");
                     gotoxy(14,0);  printf("If you want to restart press your keyboard : <spacebar>");
                     textcolor(11);
                     show_word("chars.txt",word,0,2,14,1);
                     textcolor(13);
-                    Read_file2("chars.txt",&cha,word[3], 56, 1);
+                    Read_file2("chars.txt",cha,word[3], 56, 1);
                     show_word("ans_character.txt",word,0,2,14,13);
                     check++;
                 }
                 else if (key == word[3] && check==3){
                     Beep(400, 50);
-                    Read_file2("ans_character.txt",&cha,word[3], 56, 13);
+                    Read_file2("ans_character.txt",cha,word[3], 56, 13);
                     for(j=1;j<=4;j++){
                         system("cls");
                         gotoxy(14,0);  printf("If you want to restart press your keyboard : <spacebar>");
                         show_word("chars.txt",word,0,3,14,1);
                         show_word("ans_character.txt",word,0,2,14,13);
-                        Read_file2("LR_UD.txt",&cha_n,'3',56,r1-j);
-                        Read_file2("LR_UD.txt",&cha_n,'4',56,r2+j);
+                        Read_file2("LR_UD.txt",cha_n,'3',56,r1-j);
+                        Read_file2("LR_UD.txt",cha_n,'4',56,r2+j);
                     }
                     system("cls");
                     gotoxy(14,0);  printf("If you want to restart press your keyboard : <spacebar>");
@@ -417,8 +429,8 @@ void stage2_pattern2()
         system("cls");
         strcpy(word,random_cha("2words.txt"));
         textcolor(12);
-        Read_file2("chars.txt",&cha,word[0], 28, 8);
-        Read_file2("chars.txt",&cha,word[1], 42, 8);
+        Read_file2("chars.txt",cha,word[0], 28, 8);
+        Read_file2("chars.txt",cha,word[1], 42, 8);
         gotoxy(14,0);  printf("If you want to restart press your keyboard : <spacebar>");
 
         while(1)
@@ -436,33 +448,33 @@ void stage2_pattern2()
                     for(j=1;j<=6;j++){
                         system("cls");
                         gotoxy(14,0);  printf("If you want to restart press your keyboard : <spacebar>");
-                        Read_file2("chars.txt",&cha,word[1], 42, 8);
-                        Read_file2("LR_UD.txt",&cha_n,'3',28,r1-j);
-                        Read_file2("LR_UD.txt",&cha_n,'4',28,r2+j);
+                        Read_file2("chars.txt",cha,word[1], 42, 8);
+                        Read_file2("LR_UD.txt",cha_n,'3',28,r1-j);
+                        Read_file2("LR_UD.txt",cha_n,'4',28,r2+j);
 
 
                     }
                     system("cls");
                     gotoxy(14,0);  printf("If you want to restart press your keyboard : <spacebar>");
                     textcolor(14);
-                    Read_file2("ans_character.txt",&cha,word[0], 28, 8);
+                    Read_file2("ans_character.txt",cha,word[0], 28, 8);
                     textcolor(12);
-                    Read_file2("chars.txt",&cha,word[1], 42, 8);
+                    Read_file2("chars.txt",cha,word[1], 42, 8);
                     check++;}
                 else if (key == word[1] && check==1){
                     Beep(400, 50);
                     for(j=1;j<=6;j++){
                         system("cls");
                         gotoxy(14,0);  printf("If you want to restart press your keyboard : <spacebar>");
-                        Read_file2("LR_UD.txt",&cha_n,'3',42,r1-j);
-                        Read_file2("LR_UD.txt",&cha_n,'4',42,r2+j);
+                        Read_file2("LR_UD.txt",cha_n,'3',42,r1-j);
+                        Read_file2("LR_UD.txt",cha_n,'4',42,r2+j);
 
                     }
                     system("cls");
                     gotoxy(14,0);  printf("If you want to restart press your keyboard : <spacebar>");
                     textcolor(14);
-                    Read_file2("ans_character.txt",&cha,word[0], 28, 8);
-                    Read_file2("ans_character.txt",&cha,word[1], 42, 8);
+                    Read_file2("ans_character.txt",cha,word[0], 28, 8);
+                    Read_file2("ans_character.txt",cha,word[1], 42, 8);
                     wait(1);
                     break;
                 }
@@ -503,15 +515,15 @@ void stage3_pattern2()
                     for(j=1;j<=6;j++){
                         system("cls");
                         gotoxy(14,0);  printf("If you want to restart press your keyboard : <spacebar>");
-                        Read_file2("LR_UD.txt",&cha_n,'3',21,r1-j);
-                        Read_file2("LR_UD.txt",&cha_n,'4',21,r2+j);
+                        Read_file2("LR_UD.txt",cha_n,'3',21,r1-j);
+                        Read_file2("LR_UD.txt",cha_n,'4',21,r2+j);
 
 
                     }
                     system("cls");
                     gotoxy(14,0);  printf("If you want to restart press your keyboard : <spacebar>");
                     textcolor(10);
-                    Read_file2("ans_character.txt",&cha,word[0], 21, 8);
+                    Read_file2("ans_character.txt",cha,word[0], 21, 8);
                     textcolor(2);
                     show_word("chars.txt",word,1,2,35,8);
                     check++;}
@@ -520,8 +532,8 @@ void stage3_pattern2()
                     for(j=1;j<=6;j++){
                         system("cls");
                         gotoxy(14,0);  printf("If you want to restart press your keyboard : <spacebar>");
-                        Read_file2("LR_UD.txt",&cha_n,'3',35,r1-j);
-                        Read_file2("LR_UD.txt",&cha_n,'4',35,r2+j);
+                        Read_file2("LR_UD.txt",cha_n,'3',35,r1-j);
+                        Read_file2("LR_UD.txt",cha_n,'4',35,r2+j);
 
                     }
                     system("cls");
@@ -529,7 +541,7 @@ void stage3_pattern2()
                     textcolor(10);
                     show_word("ans_character.txt",word,0,1,21,8);
                     textcolor(2);
-                    Read_file2("chars.txt",&cha,word[2],49,8);
+                    Read_file2("chars.txt",cha,word[2],49,8);
 
                     check++;
                 }
@@ -538,8 +550,8 @@ void stage3_pattern2()
                     for(j=1;j<=6;j++){
                         system("cls");
                         gotoxy(14,0);  printf("If you want to restart press your keyboard : <spacebar>");
-                        Read_file2("LR_UD.txt",&cha_n,'3',49,r1-j);
-                        Read_file2("LR_UD.txt",&cha_n,'4',49,r2+j);
+                        Read_file2("LR_UD.txt",cha_n,'3',49,r1-j);
+                        Read_file2("LR_UD.txt",cha_n,'4',49,r2+j);
 
                     }
                     system("cls");
@@ -587,15 +599,15 @@ void stage4_pattern2()
                     for(j=1;j<=6;j++){
                         system("cls");
                         gotoxy(14,0);  printf("If you want to restart press your keyboard : <spacebar>");
-                        Read_file2("LR_UD.txt",&cha_n,'3',14,r1-j);
-                        Read_file2("LR_UD.txt",&cha_n,'4',14,r2+j);
+                        Read_file2("LR_UD.txt",cha_n,'3',14,r1-j);
+                        Read_file2("LR_UD.txt",cha_n,'4',14,r2+j);
 
 
                     }
                     system("cls");
                     gotoxy(14,0);  printf("If you want to restart press your keyboard : <spacebar>");
                     textcolor(13);
-                    Read_file2("ans_character.txt",&cha,word[0], 14, 8);
+                    Read_file2("ans_character.txt",cha,word[0], 14, 8);
                     textcolor(5);
                     show_word("chars.txt",word,1,3,28,8);
                     check++;}
@@ -604,8 +616,8 @@ void stage4_pattern2()
                     for(j=1;j<=6;j++){
                         system("cls");
                         gotoxy(14,0);  printf("If you want to restart press your keyboard : <spacebar>");
-                        Read_file2("LR_UD.txt",&cha_n,'3',28,r1-j);
-                        Read_file2("LR_UD.txt",&cha_n,'4',28,r2+j);
+                        Read_file2("LR_UD.txt",cha_n,'3',28,r1-j);
+                        Read_file2("LR_UD.txt",cha_n,'4',28,r2+j);
 
                     }
                     system("cls");
@@ -622,8 +634,8 @@ void stage4_pattern2()
                     for(j=1;j<=6;j++){
                         system("cls");
                         gotoxy(14,0);  printf("If you want to restart press your keyboard : <spacebar>");
-                        Read_file2("LR_UD.txt",&cha_n,'3',42,r1-j);
-                        Read_file2("LR_UD.txt",&cha_n,'4',42,r2+j);
+                        Read_file2("LR_UD.txt",cha_n,'3',42,r1-j);
+                        Read_file2("LR_UD.txt",cha_n,'4',42,r2+j);
 
                     }
                     system("cls");
@@ -631,7 +643,7 @@ void stage4_pattern2()
                     textcolor(13);
                     show_word("ans_character.txt",word,0,2,14,8);
                     textcolor(5);
-                    Read_file2("chars.txt",&cha,word[3],56,8);
+                    Read_file2("chars.txt",cha,word[3],56,8);
 
                     check++;
                 }
@@ -640,8 +652,8 @@ void stage4_pattern2()
                     for(j=1;j<=6;j++){
                         system("cls");
                         gotoxy(14,0);  printf("If you want to restart press your keyboard : <spacebar>");
-                        Read_file2("LR_UD.txt",&cha_n,'3',56,r1-j);
-                        Read_file2("LR_UD.txt",&cha_n,'4',56,r2+j);
+                        Read_file2("LR_UD.txt",cha_n,'3',56,r1-j);
+                        Read_file2("LR_UD.txt",cha_n,'4',56,r2+j);
 
                     }
                     system("cls");
@@ -730,7 +742,7 @@ void time_spented(double time_spent)
         for(i=0;i<2;i++){
             if(keep[i] >= 48 && keep[i] <= 57){
                 //number_in(keep[i],indextx,11);
-                Read_file2("number.txt",&cha_n,keep[i],indextx,11);
+                Read_file2("number.txt",cha_n,keep[i],indextx,11);
                 indextx += 10;
             }
         }
@@ -739,7 +751,7 @@ void time_spented(double time_spent)
         for(i=2;i<5;i++){
             if(keep[i] >= 48 && keep[i] <= 57){
                 //number_in(keep[i],indextx,11);
-                Read_file2("number.txt",&cha_n,keep[i],indextx,11);
+                Read_file2("number.txt",cha_n,keep[i],indextx,11);
                 indextx += 10;
             }
         }
@@ -749,7 +761,7 @@ void time_spented(double time_spent)
          for(i=0;i<3;i++){
             if(keep[i] >= 48 && keep[i] <= 57){
                 //number_in(keep[i],indextx,11);
-                Read_file2("number.txt",&cha_n,keep[i],indextx,11);
+                Read_file2("number.txt",cha_n,keep[i],indextx,11);
                 indextx += 10;
             }
         }
@@ -758,7 +770,7 @@ void time_spented(double time_spent)
         for(i=3;i<6;i++){
             if(keep[i] >= 48 && keep[i] <= 57){
                 //number_in(keep[i],indextx,11);
-                Read_file2("number.txt",&cha_n,keep[i],indextx,11);
+                Read_file2("number.txt",cha_n,keep[i],indextx,11);
                 indextx += 10;
             }
         }
@@ -772,7 +784,7 @@ void show_word(char*dir,const char *word,int index_x,int index_y,int px,int py) 
 {
     int i;
     for(i=index_x;i<=index_y;i++){
-        Read_file2(dir,&cha,word[i], px, py);
+        Read_file2(dir,cha,word[i], px, py);
         px+=14;
     }
 }
@@ -796,7 +808,7 @@ const char*random_cha(char*dir)
         file = fopen(dir, "r");
         if (file == NULL){
             printf("The file cannot be opened.\n");
-            return 1;
+            break;
         }
         cnt = 0;
         while(1==fscanf(file, "%24s", word)){
@@ -845,7 +857,7 @@ void Read_file(char* dir, int x, int y)
     fclose(info);
 }
 
-void Read_file2(char* dir,char**pointer,char character, int x, int y)
+void Read_file2(char* dir,const char *pointer,char character, int x, int y)
 {
     int count = 0;
     FILE *info;
