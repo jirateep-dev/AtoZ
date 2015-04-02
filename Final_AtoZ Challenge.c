@@ -688,7 +688,7 @@ void load()
 {
     int r,q;
     gotoxy(36,14);
-    printf("load2ing...");
+    printf("loading...");
     gotoxy(30,15);
     for(r=1;r<=20;r++){
     	for(q=0;q<=20000000;q++);
@@ -699,38 +699,36 @@ void load()
 void load2(int position1, int position2)
 {
     system("cls");
-    Read_file("load.txt",6,10);
+    gotoxy(35,12);   printf("LOADING...");
 
     for(i=position1;i<=position2;i++)  //0 76
     {
-        gotoxy(i,position1);
+        gotoxy(i,11);
         for(k=0;k<=2;k++)
             printf("%c",178);
     }
 
     for(i=position1;i<=position2;i++)
     {
-        gotoxy(i,24);
+        gotoxy(i,13);
         for(k=0;k<=2;k++)
             printf("%c",178);
     }
-    gotoxy(0,0);
+    gotoxy(0,11);
     for(i=1;i<=79;i++){
         textcolor(12);
     	for(j=0;j<=2000000;j++);
     		printf("%c",178);
     }
     position2+=2;
-    gotoxy(position2,24);
+    gotoxy(position2,13);
     for(i=1;i<=79;i++){
         textcolor(12);
     	for(j=0;j<=2000000;j++);
     		printf("%c",178);
         position2--;
-        gotoxy(position2,24);
+        gotoxy(position2,13);
     }
-    textcolor(11);
-    Read_file("load.txt",6,10);
     wait(1);
 
 }
@@ -854,7 +852,7 @@ void square(int startx,int endx,int starty,int endy,int position)//y=place,a=sta
 }
 void window()
 {
-	ClearConsoleToColors(2,0);
+	ClearConsoleToColors(15,0);
 	casewindow();
 	background();
 	//word AtoZ
@@ -901,6 +899,7 @@ void window()
 }
 void stage()
 {
+    ClearConsoleToColors(15,0);
 	system("cls");
 	FILE *article;
 	article=fopen("AtoZ.txt","r");
@@ -986,9 +985,9 @@ void arrow(int point,int mode)
 					case 1:
 					{
 						if(count==1){play_stage1(); check=0; break;}
-						if(count==2){play_stage2to4(2); check=0; break;}
-						if(count==3){play_stage2to4(3); check=0; break;}
-						if(count==4){play_stage2to4(4); check=0; break;}
+						if(count==2){load2(0,76); play_stage2to4(2); wait_key(1); check=0; break;}
+						if(count==3){load2(0,76); play_stage2to4(3); wait_key(1); check=0; break;}
+						if(count==4){load2(0,76); play_stage2to4(4); wait_key(1); check=0; break;}
 
 					}
 					case 2:
@@ -1051,6 +1050,8 @@ void move(int point,int count,int mode)
 
 void wait_key(int choose)
 {
+    if(choose==1){gotoxy(15,24);  printf("Back to SELECT STAGE press your keyboard : <spacebar>");}
+    if(choose==2){gotoxy(15,17);  printf("Back to SELECT RECORD press your keyboard : <spacebar>");}
     while(1)
     {
         if (_kbhit())
@@ -1059,14 +1060,8 @@ void wait_key(int choose)
 
             if (key == ' '){
                 system("cls");
-                if(choose==1){
-                        gotoxy(17,24);  printf("Back to SELECT STAGE press your keyboard : <spacebar>");
-                        stage();
-                }
-                if(choose==1){
-                        gotoxy(17,24);  printf("Back to SELECT RECORD press your keyboard : <spacebar>");
-                        besttime();
-                }
+                if(choose==1){stage();}
+                if(choose==2){besttime();}
                 break;}
         }
     }
