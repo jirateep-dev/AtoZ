@@ -951,7 +951,7 @@ void stage()
 	square(24,37,18,19,17);
 	square(42,55,18,19,17);
 	square(60,73,18,19,17);
-	gotoxy(22,22); printf("Press spacebar to Back to main menu.");
+	gotoxy(21,22); printf("Press <spacebar> back to MAIN MENU.");
 	arrow(4,1);
 	getch();
 }
@@ -965,7 +965,7 @@ void besttime()
 	square(24,37,18,19,17);
 	square(42,55,18,19,17);
 	square(60,73,18,19,17);
-	gotoxy(22,22); printf("Press spacebar to Back to main menu.");
+	gotoxy(21,22); printf("Press <spacebar> back to MAIN MENU.");
 	arrow(4,2);
 	getch();
 }
@@ -1103,7 +1103,7 @@ void wait_key(int choose)
 {
     if(choose==1){gotoxy(15,24);  printf("Back to SELECT STAGE press your keyboard : <spacebar>");}
     if(choose==2){gotoxy(15,17);  printf("Back to SELECT RECORD press your keyboard : <spacebar>");}
-    if(choose==3){gotoxy(22,22);  printf("Press spacebar to Back to main menu.");}
+    if(choose==3){gotoxy(21,22);  printf("Press <spacebar> back to MAIN MENU.");}
     while(1)
     {
         if (_kbhit())
