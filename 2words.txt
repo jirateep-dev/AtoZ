@@ -13,3 +13,7 @@ me
 op
 do
 ah
+pi
+io
+ig
+sd
