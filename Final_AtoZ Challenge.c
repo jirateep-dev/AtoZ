@@ -601,11 +601,9 @@ const char*random_cha(char*dir)
             } else {
                 random = random + RAND_MAX*part + rand();
             }
-           // printf("%s\n", words[random]);
            return words[random];
         } else {
             int random = rand() % n;
-           // printf("%s\n", words[random]);
            return words[random];
         }
     }
