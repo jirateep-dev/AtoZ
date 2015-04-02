@@ -37,11 +37,7 @@ void Read_file(char*dir, int x, int y);
 void Read_file2(char*dir,const char *pointer,char character, int x, int y);
 void time_spented(char*dir, double time_spent);
 void show_word(char*dir,const char*word,int index_x,int index_y,int px,int py);  // px = position x / py = position y
-void character(char num);
 void number_in(char num,int x,int y);
-void right();
-void left();
-void load();
 void load2(int position1, int position2);
 
 
@@ -101,9 +97,9 @@ void play_stage1()
 
 
     Read_file2("chars.txt",cha,cha[index_cha],34,7);
-
+    gotoxy(17,21);  printf("Restart this stage press your keyboard : <spacebar>");
      while(1){
-        gotoxy(17,21);  printf("Restart this stage press your keyboard : <spacebar>");
+
         if (_kbhit())
         {
             gotoxy(17,21);  printf("Restart this stage press your keyboard : <spacebar>");
@@ -155,7 +151,7 @@ void stage2()
 
     for(i=0;i<=9;i++){
         int check=0;
-        int r1=8,r2=8;
+        int r1=5,r2=14;
         system("cls");
         strcpy(word,random_cha("2words.txt"));
         textcolor(12);
@@ -178,10 +174,13 @@ void stage2()
                     Beep(400, 50);
                     for(j=1;j<=3;j++){
                         system("cls");
-                        gotoxy(17,21);  printf("Restart this stage press your keyboard : <spacebar>");
-                        Read_file2("chars.txt",cha,word[1], 42, 8);
+
+                        textcolor(14);
                         Read_file2("LR_UD.txt",cha_n,'3',28,r1-j);
                         Read_file2("LR_UD.txt",cha_n,'4',28,r2+j);
+
+                        textcolor(12);
+                        gotoxy(17,21);  printf("Restart this stage press your keyboard : <spacebar>");
 
 
                     }
@@ -196,9 +195,13 @@ void stage2()
                     Beep(400, 50);
                     for(j=1;j<=3;j++){
                         system("cls");
-                        gotoxy(17,21);  printf("Restart this stage press your keyboard : <spacebar>");
+
+                        textcolor(14);
                         Read_file2("LR_UD.txt",cha_n,'3',42,r1-j);
                         Read_file2("LR_UD.txt",cha_n,'4',42,r2+j);
+
+                        textcolor(12);
+                        gotoxy(17,21);  printf("Restart this stage press your keyboard : <spacebar>");
 
                     }
                     system("cls");
@@ -224,7 +227,7 @@ void stage3()
 
     for(i=0;i<=9;i++){
         int check=0;
-        int r1=8,r2=8;
+        int r1=5,r2=14;
         system("cls");
         strcpy(word,random_cha("3words.txt"));
         textcolor(2);
@@ -245,9 +248,13 @@ void stage3()
                     Beep(400, 50);
                     for(j=1;j<=3;j++){
                         system("cls");
-                        gotoxy(17,21);  printf("Restart this stage press your keyboard : <spacebar>");
+
+                        textcolor(10);
                         Read_file2("LR_UD.txt",cha_n,'3',21,r1-j);
                         Read_file2("LR_UD.txt",cha_n,'4',21,r2+j);
+
+                        textcolor(2);
+                        gotoxy(17,21);  printf("Restart this stage press your keyboard : <spacebar>");
 
 
                     }
@@ -262,9 +269,14 @@ void stage3()
                     Beep(400, 50);
                     for(j=1;j<=3;j++){
                         system("cls");
-                        gotoxy(17,21);  printf("Restart this stage press your keyboard : <spacebar>");
+
+                        textcolor(10);
                         Read_file2("LR_UD.txt",cha_n,'3',35,r1-j);
                         Read_file2("LR_UD.txt",cha_n,'4',35,r2+j);
+
+                        textcolor(2);
+                        gotoxy(17,21);  printf("Restart this stage press your keyboard : <spacebar>");
+
 
                     }
                     system("cls");
@@ -280,9 +292,14 @@ void stage3()
                     Beep(400, 50);
                     for(j=1;j<=3;j++){
                         system("cls");
-                        gotoxy(17,21);  printf("Restart this stage press your keyboard : <spacebar>");
+
+                        textcolor(10);
                         Read_file2("LR_UD.txt",cha_n,'3',49,r1-j);
                         Read_file2("LR_UD.txt",cha_n,'4',49,r2+j);
+
+                        textcolor(2);
+                        gotoxy(17,21);  printf("Restart this stage press your keyboard : <spacebar>");
+
 
                     }
                     system("cls");
@@ -308,7 +325,7 @@ void stage4()
 
     for(i=0;i<=9;i++){
         int check=0;
-        int r1=8,r2=8;
+        int r1=5,r2=14;
         system("cls");
         strcpy(word,random_cha("4words.txt"));
         textcolor(5);
@@ -329,11 +346,16 @@ void stage4()
                     Beep(400, 50);
                     for(j=1;j<=3;j++){
                         system("cls");
-                        gotoxy(17,21);  printf("Restart this stage press your keyboard : <spacebar>");
+
+                        textcolor(13);
                         Read_file2("LR_UD.txt",cha_n,'3',14,r1-j);
                         Read_file2("LR_UD.txt",cha_n,'4',14,r2+j);
+
+                        textcolor(5);
+                        gotoxy(17,21);  printf("Restart this stage press your keyboard : <spacebar>");
                     }
                     system("cls");
+
                     gotoxy(17,21);  printf("Restart this stage press your keyboard : <spacebar>");
                     textcolor(13);
                     Read_file2("ans_character.txt",cha,word[0], 14, 8);
@@ -344,9 +366,13 @@ void stage4()
                     Beep(400, 50);
                     for(j=1;j<=3;j++){
                         system("cls");
-                        gotoxy(17,21);  printf("Restart this stage press your keyboard : <spacebar>");
+
+                        textcolor(13);
                         Read_file2("LR_UD.txt",cha_n,'3',28,r1-j);
                         Read_file2("LR_UD.txt",cha_n,'4',28,r2+j);
+
+                        textcolor(5);
+                        gotoxy(17,21);  printf("Restart this stage press your keyboard : <spacebar>");
 
                     }
                     system("cls");
@@ -361,9 +387,13 @@ void stage4()
                     Beep(400, 50);
                     for(j=1;j<=3;j++){
                         system("cls");
-                        gotoxy(17,21);  printf("Restart this stage press your keyboard : <spacebar>");
+
+                        textcolor(13);
                         Read_file2("LR_UD.txt",cha_n,'3',42,r1-j);
                         Read_file2("LR_UD.txt",cha_n,'4',42,r2+j);
+
+                        textcolor(5);
+                        gotoxy(17,21);  printf("Restart this stage press your keyboard : <spacebar>");
 
                     }
                     system("cls");
@@ -378,9 +408,13 @@ void stage4()
                     Beep(400, 50);
                     for(j=1;j<=3;j++){
                         system("cls");
-                        gotoxy(17,21);  printf("Restart this stage press your keyboard : <spacebar>");
+
+                        textcolor(13);
                         Read_file2("LR_UD.txt",cha_n,'3',56,r1-j);
                         Read_file2("LR_UD.txt",cha_n,'4',56,r2+j);
+
+                        textcolor(5);
+                        gotoxy(17,21);  printf("Restart this stage press your keyboard : <spacebar>");
 
                     }
                     system("cls");
@@ -691,18 +725,6 @@ void wait( int sec )
 }
 
 
-void load()
-{
-    int r,q;
-    gotoxy(36,14);
-    printf("loading...");
-    gotoxy(30,15);
-    for(r=1;r<=20;r++){
-    	for(q=0;q<=20000000;q++);
-    		printf("%c",178);
-    }
-}
-
 void load2(int position1, int position2)
 {
     system("cls");
@@ -811,7 +833,6 @@ void casewindow()
 }
 void background()
 {
-	int i,j,k;
 	for(i=1;i<=22;i=i+3)
 	{
 		for(j=1;j<=78;j=j+3)
@@ -863,6 +884,7 @@ void window()
 	casewindow();
 	background();
 	//word AtoZ
+	textcolor(12);
 	gotoxy(23,3); printf("%c%c",219,219);
 	gotoxy(22,4); printf("%c%c%c%c",219,219,219,219);
 	gotoxy(21,5); printf("%c%c",219,219);
@@ -891,8 +913,10 @@ void window()
 	gotoxy(10,10);
 	printf("                                                           ");
 	//word CHALLANGE
+	textcolor(13);
 	gotoxy(10,13);
 	printf("     C     H     A     L     L     A     N     G     E     ");
+	textcolor(15);
 	square(5,18,18,19,17);
 	square(24,37,18,19,17);
 	square(42,55,18,19,17);
@@ -906,7 +930,7 @@ void window()
 }
 void stage()
 {
-    ClearConsoleToColors(15,0);
+    ClearConsoleToColors(12,0);
 	system("cls");
 	FILE *article;
 	article=fopen("AtoZ.txt","r");
@@ -922,6 +946,7 @@ void stage()
 		}while(c!=EOF);
 		fclose(article);
 	}
+	textcolor(15);
 	square(5,18,18,19,17);
 	square(24,37,18,19,17);
 	square(42,55,18,19,17);
@@ -932,21 +957,10 @@ void stage()
 }
 void besttime()
 {
+    textcolor(12);
 	system("cls");
-	FILE *article;
-	article=fopen("besttime.txt","r");
-	char c;
-	if(article==NULL)
-		printf("No");
-	else
-	{
-		do
-		{
-			//c=fgetc(article);
-			putchar(c=fgetc(article));
-		}while(c!=EOF);
-		fclose(article);
-	}
+	Read_file("besttime.txt",0,0);
+	textcolor(15);
 	square(5,18,18,19,17);
 	square(24,37,18,19,17);
 	square(42,55,18,19,17);
@@ -955,12 +969,17 @@ void besttime()
 	arrow(4,2);
 	getch();
 }
+void help()
+{
+    system("cls");
+    wait_key(3);
+
+}
 
 void arrow(int point,int mode)
 {
 	int count=1,check=1;
 	char word='0';
-	//gotoxy(64,18);
 	while(check)
 	{
 		switch(word)
@@ -986,6 +1005,7 @@ void arrow(int point,int mode)
 					{
 						if(count==1){stage(); check=0; break;}
 						else if(count==2){besttime(); check=0; break;}
+						else if(count==3){help(); check=0; break;}
 						else if(count==4){exit(0); check=0; break;}
 
 					}
@@ -1021,34 +1041,58 @@ void move(int point,int count,int mode)
 	{"STAGE 1","STAGE 2","STAGE 3","STAGE 4"}};
 	if(point==4)
 	{
-		gotoxy(8,18); printf("  %s",menu[mode][0]);
-		gotoxy(27,18); printf("  %s",menu[mode][1]);
-		gotoxy(45,18); printf("  %s",menu[mode][2]);
-		gotoxy(63,18); printf("  %s",menu[mode][3]);
 		switch (count)
         {
         case 1:
         {
+            textcolor(15);
+            gotoxy(26,18);  printf("   %s",menu[mode][1]);
+            gotoxy(44,18);  printf("   %s",menu[mode][2]);
+            gotoxy(62,18);  printf("   %s",menu[mode][3]);
+
             gotoxy(7,18);
+            textcolor(12);
             printf(" %c %s",16,menu[mode][0]);
+            textcolor(15);
             break;
     	}
         case 2:
         {
+            textcolor(15);
+            gotoxy(7,18);   printf("   %s",menu[mode][0]);
+            gotoxy(44,18);  printf("   %s",menu[mode][2]);
+            gotoxy(62,18);  printf("   %s",menu[mode][3]);
+
             gotoxy(26,18);
+            textcolor(12);
             printf(" %c %s",16,menu[mode][1]);
+            textcolor(15);
             break;
     	}
         case 3:
         {
+            textcolor(15);
+            gotoxy(7,18);   printf("   %s",menu[mode][0]);
+            gotoxy(26,18);  printf("   %s",menu[mode][1]);
+            gotoxy(62,18);  printf("   %s",menu[mode][3]);
+
             gotoxy(44,18);
+            textcolor(12);
             printf(" %c %s",16,menu[mode][2]);
+            textcolor(15);
             break;
     	}
         case 4:
         {
+            textcolor(15);
+            gotoxy(7,18);   printf("   %s",menu[mode][0]);
+            gotoxy(26,18);  printf("   %s",menu[mode][1]);
+            gotoxy(44,18);  printf("   %s",menu[mode][2]);
+
             gotoxy(62,18);
+            textcolor(12);
             printf(" %c %s",16,menu[mode][3]);
+            textcolor(15);
             break;
         }
         }
@@ -1059,6 +1103,7 @@ void wait_key(int choose)
 {
     if(choose==1){gotoxy(15,24);  printf("Back to SELECT STAGE press your keyboard : <spacebar>");}
     if(choose==2){gotoxy(15,17);  printf("Back to SELECT RECORD press your keyboard : <spacebar>");}
+    if(choose==3){gotoxy(22,22);  printf("Press spacebar to Back to main menu.");}
     while(1)
     {
         if (_kbhit())
@@ -1069,6 +1114,7 @@ void wait_key(int choose)
                 system("cls");
                 if(choose==1){stage();}
                 if(choose==2){besttime();}
+                if(choose==3){window();}
                 break;}
         }
     }
