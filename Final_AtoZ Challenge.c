@@ -59,6 +59,7 @@ int main()
     window();
 
 
+
     getch();
 
 }
@@ -98,7 +99,7 @@ void play_stage1()
 
     begin = clock();
 
-    //character(cha[index_cha]);
+
     Read_file2("chars.txt",cha,cha[index_cha],34,7);
 
      while(1){
@@ -205,7 +206,7 @@ void stage2()
                     textcolor(14);
                     Read_file2("ans_character.txt",cha,word[0], 28, 8);
                     Read_file2("ans_character.txt",cha,word[1], 42, 8);
-                   // wait(1);
+
                     break;
                 }
             }
@@ -288,7 +289,7 @@ void stage3()
                     gotoxy(17,21);  printf("Restart this stage press your keyboard : <spacebar>");
                     textcolor(10);
                     show_word("ans_character.txt",word,0,2,21,8);
-                    //wait(1);
+
                     break;
                 }
             }
@@ -331,8 +332,6 @@ void stage4()
                         gotoxy(17,21);  printf("Restart this stage press your keyboard : <spacebar>");
                         Read_file2("LR_UD.txt",cha_n,'3',14,r1-j);
                         Read_file2("LR_UD.txt",cha_n,'4',14,r2+j);
-
-
                     }
                     system("cls");
                     gotoxy(17,21);  printf("Restart this stage press your keyboard : <spacebar>");
@@ -356,7 +355,6 @@ void stage4()
                     show_word("ans_character.txt",word,0,1,14,8);
                     textcolor(5);
                     show_word("chars.txt",word,2,3,42,8);
-
                     check++;
                 }
                 else if (key == word[2] && check==2){
@@ -374,7 +372,6 @@ void stage4()
                     show_word("ans_character.txt",word,0,2,14,8);
                     textcolor(5);
                     Read_file2("chars.txt",cha,word[3],56,8);
-
                     check++;
                 }
                 else if (key == word[3] && check==3){
@@ -390,7 +387,6 @@ void stage4()
                     gotoxy(17,21);  printf("Restart this stage press your keyboard : <spacebar>");
                     textcolor(13);
                     show_word("ans_character.txt",word,0,3,14,8);
-                   // wait(1);
                     break;
                 }
             }
@@ -430,10 +426,7 @@ void play_stage2to4(int stages) // stage must has value 2-4
 
     begin = clock();
 
-    //gotoxy(17,21);  printf("If you want to restart put your keyboard : <spacebar>");
-
-    //Function Here
-
+//**************************************************************
     switch(stages)
     {
         case 2:     stage2();     break;
@@ -441,7 +434,7 @@ void play_stage2to4(int stages) // stage must has value 2-4
         case 4:     stage4();     break;
 
     }
-
+//**************************************************************
     end = clock();
     time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
     system("cls");
@@ -473,22 +466,20 @@ void time_spented(char*dir, double time_spent)
     else
         strcpy(keep,time_s);
 
-    Read_file("time spent.txt",24,5);
+    Read_file2("time spent.txt",cha_n,'1',22,4);
 
     if(time_spent <= 100){
         int indextx = 17;
         for(i=0;i<2;i++){
             if(keep[i] >= 48 && keep[i] <= 57){
-                //number_in(keep[i],indextx,11);
                 Read_file2("number.txt",cha_n,keep[i],indextx,11);
                 indextx += 10;
             }
         }
-        Read_file("symbol.txt",indextx,11);
+        Read_file2("time spent.txt",cha_n,'2',indextx,11);
         indextx+=10;
         for(i=2;i<5;i++){
             if(keep[i] >= 48 && keep[i] <= 57){
-                //number_in(keep[i],indextx,11);
                 Read_file2("number.txt",cha_n,keep[i],indextx,11);
                 indextx += 10;
             }
@@ -498,16 +489,14 @@ void time_spented(char*dir, double time_spent)
          int indextx = 7;
          for(i=0;i<3;i++){
             if(keep[i] >= 48 && keep[i] <= 57){
-                //number_in(keep[i],indextx,11);
                 Read_file2("number.txt",cha_n,keep[i],indextx,11);
                 indextx += 10;
             }
         }
-        Read_file("symbol.txt",indextx,11);
+        Read_file2("time spent.txt",cha_n,'2',indextx,11);
         indextx+=10;
         for(i=3;i<6;i++){
             if(keep[i] >= 48 && keep[i] <= 57){
-                //number_in(keep[i],indextx,11);
                 Read_file2("number.txt",cha_n,keep[i],indextx,11);
                 indextx += 10;
             }
@@ -535,7 +524,7 @@ void time_spented(char*dir, double time_spent)
     time_read[index_tr] = '\0';
     float time_r = atof(time_read);
     wait(3);
-    if(time_spent < time_r){
+    if(time_spent < time_r || time_r == 0){
         for(i=0;i<=13;i++){
             textcolor(12);
             Read_file("scene_besttime.txt",2,3);
