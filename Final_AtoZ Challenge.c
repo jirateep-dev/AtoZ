@@ -58,6 +58,7 @@ int main()
 
     window();
 
+
     getch();
 
 }
@@ -525,8 +526,18 @@ void time_spented(char*dir, double time_spent)
     fclose(info);
     time_read[index_tr] = '\0';
     float time_r = atof(time_read);
-    if(time_spent < time_r)
+    if(time_spent < time_r){
+        for(i=0;i<=13;i++){
+            textcolor(12);
+            Read_file("scene_besttime.txt",2,3);
+            textcolor(14);
+            Read_file("scene_besttime.txt",2,3);
+
+        }
+        textcolor(15);
         record(dir,time_spent);
+
+    }
     else{
         wait_key(1);
     }
