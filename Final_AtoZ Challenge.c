@@ -41,20 +41,17 @@ int main()
         cha_n[i] = num_i;
         num_i++;
     }
+    /*
     play_stage1();
-    wait(5);
-    /*play_stage2to4(2);
-    wait(5);
+    getch();
+    load2(0,76);
+    play_stage2to4(2);
+    getch();
+    load2(0,76);
     play_stage2to4(3);
-    wait(5);
+    getch();
+    load2(0,76);
     play_stage2to4(4);*/
-/*
-    char a[10],b[10];
-    strcpy(a,"9.98");
-    strcpy(b,"9.99");
-
-    if(a<b)
-        printf("YES");*/
 
 
 
@@ -146,7 +143,7 @@ void play_stage1()
 
 void stage2()
 {
-    load2(0,76);
+
     ClearConsoleToColors(12, 16);
     char word[100];
 
@@ -214,7 +211,7 @@ void stage2()
 void stage3()
 {
 
-    load2(0,76);
+
     ClearConsoleToColors(2, 16);
     char word[100];
 
@@ -298,7 +295,7 @@ void stage3()
 void stage4()
 {
 
-    load2(0,76);
+
     ClearConsoleToColors(5, 16);
     char word[100];
 
@@ -426,6 +423,7 @@ void play_stage2to4(int stage) // stage must has value 2-4
     //gotoxy(17,20);  printf("If you want to restart put your keyboard : <spacebar>");
 
     //Function Here
+
     switch(stage)
     {
         case 2:     stage2();     break;
@@ -695,6 +693,7 @@ void load()
 
 void load2(int position1, int position2)
 {
+    system("cls");
     Read_file("load.txt",6,10);
 
     for(i=position1;i<=position2;i++)  //0 76
