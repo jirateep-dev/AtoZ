@@ -11,19 +11,13 @@
 
 int i,j,k,l,key,num_c=97,num_i=48;
 char cha[27],cha_n[11],c;
-/*
-char c;
-char *cha[27] = {'a','b','c','d','e','f','g','h','i','j','k','l'\
-,'m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
-char *cha_n[11] = {'0','1','2','3','4','5','6','7','8','9'};*/
-
 
 void ClearConsoleToColors(int ForgC, int BackC);
 void textcolor(int color);
 const char*random_cha(char*dir);
 void Read_file(char*dir, int x, int y);
 void Read_file2(char*dir,const char *pointer,char character, int x, int y);
-void time_spented(int form, double time_spent);
+void time_spented(char*dir, double time_spent);
 void show_word(char*dir,const char*word,int index_x,int index_y,int px,int py);  // px = position x / py = position y
 void character(char num);
 void number_in(char num,int x,int y);
@@ -31,7 +25,7 @@ void right();
 void left();
 void load();
 void load2(int position1, int position2);
-void record(int form,double time_spent);
+void record(char*dir,double time_spent);
 void gotoxy(int x, int y);
 void wait( int sec );
 void play_stage1();
@@ -49,13 +43,20 @@ int main()
     }
     play_stage1();
     wait(5);
-    play_stage2to4(2);
+    /*play_stage2to4(2);
     wait(5);
     play_stage2to4(3);
     wait(5);
-    play_stage2to4(4);
+    play_stage2to4(4);*/
+/*
+    char a[10],b[10];
+    strcpy(a,"9.98");
+    strcpy(b,"9.99");
 
-    //load2(0,76);
+    if(a<b)
+        printf("YES");*/
+
+
 
 
     getch();
@@ -111,7 +112,7 @@ void play_stage1()
 
                 Beep(400, 50);
 
-                for(i=1;i<=6;i++){
+                for(i=1;i<=5;i++){
                     system("cls");
                     Read_file2("LR_UD.txt",cha_n,'2',r1+i,9);
                     Read_file2("LR_UD.txt",cha_n,'1',r2-i,9);
@@ -139,7 +140,7 @@ void play_stage1()
 //----------------------------End Play ------------------------------
     printf("Time(s) : %.2f",time_spent);
 
-    time_spented(1,time_spent);
+    time_spented("record_stage1.txt",time_spent);
 
 }
 
@@ -442,9 +443,9 @@ void play_stage2to4(int stage) // stage must has value 2-4
 
     switch(stage)
     {
-        case 2:     time_spented(2,time_spent);     break;
-        case 3:     time_spented(3,time_spent);     break;
-        case 4:     time_spented(4,time_spent);     break;
+        case 2:     time_spented("record_stage2.txt",time_spent);     break;
+        case 3:     time_spented("record_stage3.txt",time_spent);     break;
+        case 4:     time_spented("record_stage4.txt",time_spent);     break;
 
     }
 
@@ -453,7 +454,7 @@ void play_stage2to4(int stage) // stage must has value 2-4
 }
 
 
-void time_spented(int form, double time_spent)
+void time_spented(char*dir, double time_spent)
 {
     int i;
     char time_s[5],keep[5];
@@ -504,7 +505,29 @@ void time_spented(int form, double time_spent)
             }
         }
     }
-    record(form,time_spent);
+
+    int count=0,index_tr=0,run=0;
+    char time_read[100];
+    FILE *info;
+    info=fopen(dir,"r");
+    do{
+        c=getc(info);
+        if(count == 2 && run<=14){
+            if(run >= 10){
+                time_read[index_tr] = c;
+                index_tr++;
+            }
+            run++;
+        }
+        if(c=='\n')
+            count++;
+
+    }while(c!=EOF);
+    fclose(info);
+    time_read[index_tr] = '\0';
+    float time_r = atof(time_read);
+    if(time_spent < time_r)
+        record(dir,time_spent);
 }
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++End Part of Stage ++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -708,22 +731,14 @@ void load2(int position1, int position2)
 
 }
 
-void record(int form,double time_spent)
+void record(char*dir,double time_spent)
 {
-    char dir[100];
-    switch(form)
-    {
-        case 1:     strcpy(dir,"record_stage1.txt");    break;
-        case 2:     strcpy(dir,"record_stage2.txt");    break;
-        case 3:     strcpy(dir,"record_stage3.txt");    break;
-        case 4:     strcpy(dir,"record_stage4.txt");    break;
-    }
     wait(2);
     system("cls");
     char plname[20],nplname[20];
     FILE *info;
     info=fopen(dir,"w");
-    printf("Enter your name\n");
+    gotoxy(30,11);   printf("Enter your name : ");
     gets(plname);
     //scanf("%[^\n]",plname);
     //************************
@@ -745,9 +760,9 @@ void record(int form,double time_spent)
 
     for(i=0;i<=50;i++)
         fprintf(info,"%c",'_');
-    fprintf(info,"\n");
+
     fclose(info);
-    printf("wanna see past records press 'y'\n");
+    gotoxy(25,12);   printf("wanna see past records press 'y' ");
     key = getch();
     if(key=='y'){
         system("cls");
