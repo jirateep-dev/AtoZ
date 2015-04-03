@@ -37,9 +37,7 @@ void Read_file(char*dir, int x, int y);
 void Read_file2(char*dir,const char *pointer,char character, int x, int y);
 void time_spented(char*dir, double time_spent);
 void show_word(char*dir,const char*word,int index_x,int index_y,int px,int py);  // px = position x / py = position y
-void number_in(char num,int x,int y);
 void load2(int position1, int position2);
-
 
 int main()
 {
@@ -53,8 +51,6 @@ int main()
     }
 
     window();
-
-
 
     getch();
 
@@ -72,8 +68,8 @@ void play_stage1()
 
 
     gotoxy(20,12);  printf("This stage press your keyboard : A to Z");
-    gotoxy(18,14);  printf("Start stage press your keyboard : <spacebar>");
-    gotoxy(17,15);  printf("Back to SELECTSTAGE press your keyboard : <S>");
+    gotoxy(17,14);  printf("Start stage press your keyboard : < spacebar >");
+    gotoxy(17,15);  printf("Back to SELECT STAGE press your keyboard : < s >");
 
     while(1)
     {
@@ -431,14 +427,17 @@ void stage4()
 
 void play_stage2to4(int stages) // stage must has value 2-4
 {
-    ClearConsoleToColors(14, 16);
+    if(stages==2){ClearConsoleToColors(14, 16);}
+    if(stages==3){ClearConsoleToColors(10, 16);}
+    if(stages==4){ClearConsoleToColors(13, 16);}
+
     home:
     system("cls");
 
 
     gotoxy(18,12);  printf("This stage press your keyboard follow the word");
-    gotoxy(19,14);  printf("Start stage press your keyboard : <spacebar>");
-    gotoxy(18,15);  printf("Back to SELECTSTAGE press your keyboard : <S>");
+    gotoxy(19,14);  printf("Start stage press your keyboard : < spacebar >");
+    gotoxy(18,15);  printf("Back to SELECT STAGE press your keyboard : < s >");
 
     while(1)
     {
@@ -793,7 +792,7 @@ void record(char*dir,double time_spent)
         fprintf(info,"%c",'_');
 
     fclose(info);
-    gotoxy(25,12);   printf("wanna see past records press 'y' ");
+    gotoxy(22,12);   printf("Wanna see past records press : < y > ");
     key = getch();
     if(key=='y'){
         system("cls");
@@ -972,6 +971,81 @@ void besttime()
 void help()
 {
     system("cls");
+    int i;
+    textcolor(12);
+	for(i=3;i<11;i++)
+	{
+		gotoxy(19,i);
+		printf(" %c%c%c    %c%c%c  %c%c%c       %c%c%c       %c%c%c",177,177,177,177,177,177,177,177,177,177,177,177,177,177,177);
+	}
+	for(i=5;i<7;i++)
+	{
+		gotoxy(23,i);
+		printf("%c%c%c%c",177,177,177,177);
+	}
+	for(i=3;i<5;i++)
+	{
+		gotoxy(35,i);
+		printf("%c%c%c%c%c",177,177,177,177,177);
+	}
+	gotoxy(35,6);
+	printf("%c%c%c%c",177,177,177,177);
+	for(i=9;i<11;i++)
+	{
+		gotoxy(35,i);
+		printf("%c%c%c%c%c",177,177,177,177,177);
+	}
+	for(i=9;i<11;i++)
+	{
+		gotoxy(45,i);
+		printf("%c%c%c%c%c",177,177,177,177,177);
+	}
+	gotoxy(55,3);
+	printf("%c%c%c%c",177,177,177,177);
+	gotoxy(55,4);
+	printf("%c%c%c%c%c",177,177,177,177,177);
+	gotoxy(55,7);
+	printf("%c%c%c%c",177,177,177,177);
+	for(i=5;i<7;i++)
+	{
+		gotoxy(58,i);
+		printf("%c%c",177,177);
+	}
+	textcolor(15);
+	gotoxy(32,12);
+	printf("AtoZ Challange");
+	for(i=10;i<70;i++)
+	{
+		gotoxy(i,1);
+		printf("%c",205);
+	}
+	for(i=10;i<30;i++)
+	{
+		gotoxy(i,12);
+		printf("%c",30);
+	}
+	for(i=48;i<70;i++)
+	{
+		gotoxy(i,12);
+		printf("%c",30);
+	}
+	textcolor(15);
+	gotoxy(10,14);
+	printf("%c%c%c%c THE GAME HAVE 4 STAGE",205,205,205,205);
+	for(i=37;i<70;i++)
+	{
+		gotoxy(i,14);
+		printf("%c",205);
+	}
+	gotoxy(24,16);
+	printf("%c  Select stage you would like to play",26);
+	gotoxy(15,18);
+	printf("and type the word or letter that show on monitor.");
+	gotoxy(21,20);
+	printf("%c  Program will record the best time",26);
+	gotoxy(15,22);
+	printf("you spent to type.");
+
     wait_key(3);
 
 }
@@ -1103,7 +1177,7 @@ void wait_key(int choose)
 {
     if(choose==1){gotoxy(15,24);  printf("Back to SELECT STAGE press your keyboard : <spacebar>");}
     if(choose==2){gotoxy(15,17);  printf("Back to SELECT RECORD press your keyboard : <spacebar>");}
-    if(choose==3){gotoxy(21,22);  printf("Press <spacebar> back to MAIN MENU.");}
+    if(choose==3){gotoxy(21,25);  printf("Press <spacebar> back to MAIN MENU.");}
     while(1)
     {
         if (_kbhit())
